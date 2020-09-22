@@ -1,0 +1,11 @@
+<web-app>
+    <servlet>
+        <servlet-name>Serverlet</servlet-name>
+        <servlet-class>Serverlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Serverlet</servlet-name>
+        <url-pattern>/get/*</url-pattern>
+    </servlet-mapping>
+</web-app>

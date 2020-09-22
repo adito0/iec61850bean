@@ -1,0 +1,6 @@
+com.beanit.iec61850bean
+com.beanit.iec61850bean.clientgui
+com.beanit.iec61850bean.clientgui.databind
+com.beanit.iec61850bean.clientgui.util
+com.beanit.josistack
+com.beanit.jositransport
