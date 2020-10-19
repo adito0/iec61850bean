@@ -49,6 +49,42 @@ public class ParsingSolarData {
         socket.close();
         return false;
     }
+
+    public boolean writeHeater(int lineIndex) throws IOException {
+        Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        String command = "SHEA " + "40";
+        out.println(command);
+        String serverResponse = input.readLine();
+        System.out.println("Server says: " + serverResponse);
+        socket.close();
+        return true;
+    }
+
+    public boolean writeSensor(int lineIndex) throws IOException {
+        Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        String command = "SSEN " + "22";
+        out.println(command);
+        String serverResponse = input.readLine();
+        System.out.println("Server says: " + serverResponse);
+        socket.close();
+        return true;
+    }
+
+    public boolean writeHouse(int lineIndex) throws IOException {
+        Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        String command = "SHEC " + "500";
+        out.println(command);
+        String serverResponse = input.readLine();
+        System.out.println("Server says: " + serverResponse);
+        socket.close();
+        return true;
+    }
 }
 
         /*

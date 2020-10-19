@@ -25,6 +25,43 @@ public class GetPVData {
         socket.close();
         return serverResponse;
     }
+
+    public String runHeater() throws IOException {
+        Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+        BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        String command = "GHEA";
+        out.println(command);
+        System.out.println("Boo");
+        String serverResponse = input.readLine();
+        System.out.println("Server says: " + serverResponse);
+        socket.close();
+        return serverResponse;
+    }
+
+    public String runSensor() throws IOException {
+        Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+        BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        String command = "GSEN";
+        out.println(command);
+        String serverResponse = input.readLine();
+        System.out.println("Server says: " + serverResponse);
+        socket.close();
+        return serverResponse;
+    }
+
+    public String runHouse() throws IOException {
+        Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+        BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        String command = "GHEC";
+        out.println(command);
+        String serverResponse = input.readLine();
+        System.out.println("Server says: " + serverResponse);
+        socket.close();
+        return serverResponse;
+    }
 }
 /*
 

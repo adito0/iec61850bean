@@ -146,6 +146,29 @@ public class ConsoleServer {
     return "Updated!";
   }
 
+  public static String writeToHouse(String value) throws ActionException {
+    ActionExecutor exe = new ActionExecutor();
+    //exe.actionCalled(WRITE_VALUE_KEY, value, "ied1lDevice1/MMXU1.TotW.mag.f", "MX");
+    exe.actionCalled(WRITE_VALUE_KEY, value, "myHomefullhouse/MMXU1.TotW.mag.f", "MX");//need to change
+    System.out.println("Wrote to house"+value.toString());
+    return "Updated!";
+  }
+
+  public static String writeToHeater(String value) throws ActionException {
+    ActionExecutor exe = new ActionExecutor();
+    //exe.actionCalled(WRITE_VALUE_KEY, value, "ied1lDevice1/MMXU1.TotW.mag.f", "MX");
+    exe.actionCalled(WRITE_VALUE_KEY, value, "myHomeheater/MMXU1.TotW.mag.f", "MX");
+    System.out.println("Wrote to heater"+value.toString());
+    return "Updated!";
+  }
+  public static String writeToSensor(String value) throws ActionException {
+    ActionExecutor exe = new ActionExecutor();
+    //exe.actionCalled(WRITE_VALUE_KEY, value, "ied1lDevice1/MMXU1.TotW.mag.f", "MX");
+    exe.actionCalled(WRITE_VALUE_KEY, value, "myHomesensor/MMXU1.TotW.mag.f", "MX");
+    System.out.println("Wrote to sensor"+value.toString());
+    return "Updated!";
+  }
+
   public static String connectToGrid() throws ActionException {
     ActionExecutor exe = new ActionExecutor();
     exe.actionCalled(WRITE_VALUE_KEY, "true", "myHomegridInterconnection/CSWI1.Pos.Oper.ctlVal", "CO");
@@ -163,6 +186,25 @@ public class ConsoleServer {
     ActionExecutor exe = new ActionExecutor();
     //return exe.actionCalled(GET_VALUE_KEY, null, "ied1lDevice1/MMXU1.TotW.mag.f", "MX");
     return exe.actionCalled(GET_VALUE_KEY, null, "myHomelDevice1/MMXU1.TotW.mag.f", "MX");
+  }
+
+  public static String getHouseConsumption() throws ActionException {
+    ActionExecutor exe = new ActionExecutor();
+    //return exe.actionCalled(GET_VALUE_KEY, null, "ied1lDevice1/MMXU1.TotW.mag.f", "MX");
+    return exe.actionCalled(GET_VALUE_KEY, null, "myHomefullhouse/MMXU1.TotW.mag.f", "MX");//need to change
+  }
+
+  public static String getHeater() throws ActionException {
+    ActionExecutor exe = new ActionExecutor();
+    //return exe.actionCalled(GET_VALUE_KEY, null, "ied1lDevice1/MMXU1.TotW.mag.f", "MX");
+    System.out.println("This was called");
+    return exe.actionCalled(GET_VALUE_KEY, null, "myHomeheater/MMXU1.TotW.mag.f", "MX");
+  }
+
+  public static String getSensor() throws ActionException {
+    ActionExecutor exe = new ActionExecutor();
+    //return exe.actionCalled(GET_VALUE_KEY, null, "ied1lDevice1/MMXU1.TotW.mag.f", "MX");
+    return exe.actionCalled(GET_VALUE_KEY, null, "myHomesensor/MMXU1.TotW.mag.f", "MX");
   }
 
   public static String printModel() throws ActionException {

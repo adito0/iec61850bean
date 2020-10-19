@@ -24,6 +24,7 @@ public class ClientHandler implements Runnable{
     @Override
     public void run() {
         while (true) {
+            String var1 = "0";
             String request = null;
             try {
                 String code = null;
@@ -33,6 +34,8 @@ public class ClientHandler implements Runnable{
                     code = request.substring(0, 4);
                 }else{
                     code = request.substring(0, 4);
+                    System.out.println("code");
+                    System.out.println(code);
                     switch (code) {
                         case "WSPV":
                             String var = ConsoleServer.writeToSolar(request.substring(5));
@@ -56,6 +59,35 @@ public class ClientHandler implements Runnable{
                             out.println(str.replace('\n', '^'));
                             break;
 
+                        case "GHEC":
+                            out.println(ConsoleServer.getHouseConsumption());
+                            break;
+
+                        case "GHEA":
+                            System.out.println("hi!!!!!!");
+                            System.out.println(ConsoleServer.getHeater());
+                            System.out.println("bye!!!!!!");
+                            out.println(ConsoleServer.getHeater());
+                            break;
+
+                        case "GSEN":
+                            out.println(ConsoleServer.getSensor());
+                            break;
+
+                        case "SHEC":
+                            var1 = ConsoleServer.writeToHouse(request.substring(5));
+                            out.println(var1);
+                            break;
+
+                        case "SHEA":
+                            var1 = ConsoleServer.writeToHeater(request.substring(5));
+                            out.println(var1);
+                            break;
+
+                        case "SSEN":
+                            var1 = ConsoleServer.writeToSensor(request.substring(5));
+                            out.println(var1);
+                            break;
 
                         default:
                             out.println("No data");
