@@ -6,18 +6,21 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class ParsingSolarData {
 
     private String SERVER_IP = null;
     private String filePath = null;
+    private String filePath_house = null;
     private int SERVER_PORT = -1;
 
     public ParsingSolarData(String ip, int port) {
         this.SERVER_IP = ip;
         this.SERVER_PORT = port;
         this.filePath = "/home/aram485/Downloads/iec61850bean/solar.csv";
+        this.filePath_house = "/home/aram485/Downloads/iec61850bean/house.csv";
     }
 
     public boolean run(int lineIndex) throws IOException {
@@ -77,11 +80,30 @@ public class ParsingSolarData {
     public boolean writeHouse(int lineIndex) throws IOException {
         Socket socket = new Socket(SERVER_IP, SERVER_PORT);
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        BufferedReader br = new BufferedReader(new FileReader(filePath_house));
         BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        String command = "SHEC " + "500";
-        out.println(command);
-        String serverResponse = input.readLine();
-        System.out.println("Server says: " + serverResponse);
+        String line = "";
+        String cvsSplitBy = ",";
+
+        if (lineIndex > 1){
+            try (Stream<String> lines = Files.lines(Paths.get(filePath_house))){
+                line = lines.skip(lineIndex-1).findFirst().get();
+            }
+            if (line != null){
+                String[] power = line.split(cvsSplitBy);
+                float power_int = (Float.parseFloat(power[power.length - 1])*1000);
+                System.out.println(power_int);
+                String command1 = "SHEC " + String.valueOf(power_int);
+                out.println(command1);
+                String serverResponse = input.readLine();
+                System.out.println("Server says: " + serverResponse);
+                socket.close();
+                return true;
+            }else{
+                socket.close();
+                return false;
+            }
+        }
         socket.close();
         return true;
     }

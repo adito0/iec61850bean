@@ -31,7 +31,7 @@ public class ClientManager {
 //            System.out.println(solarPower.runHeater());
 //            System.out.println(solarPower.runSensor());
 //            gridConn.run(Float.parseFloat(solarPowerValue), Float.parseFloat(home.substring(34)));
-//            //printModel.run();
+//            printModel.run();
             Thread.sleep(3000);
         }
         System.out.println("Finished");
